@@ -33,11 +33,11 @@ app.put("/posts/:id", middlewares.authenticate, upload.single("picture"), postsC
 app.get("/api/posts", postsController.getAll);
 app.get('/api/posts/:id', postsController.getById);
 app.get("/users/:id/posts", usersController.getPostsById);
-app.delete("/users/:id", middlewares.authenticate,middlewares.isAdmin, postsController.deleteById);
+app.delete("/users/:id", middlewares.authenticate, middlewares.isAdmin, postsController.deleteById);
 
 // Public File Access
 app.use("/public/files", express.static(path.join(__dirname, "/storages")));
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT || PORT, () => {
     console.log(`Server berhasil berjalan di port http://localhost:${PORT}`);
 });
